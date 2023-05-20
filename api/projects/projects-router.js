@@ -44,6 +44,24 @@ router.put('/:id', validateProjectId,validateProject,(req,res,next)=>{
     .catch(next)
 })
 
+router.delete('/:id', validateProjectId, async (req,res,next)=>{
+try{
+const deleted = await Projects.remove(req.params.id) //eslint-disable-line
+const deletedProject = await Projects.get(req.params.id)
+res.json(deletedProject)
+}catch(err){
+next(err)
+}
+})
+
+router.get('/:id/actions',validateProjectId, async (req,res,next) =>{
+    try{
+const actions = await Projects.getProjectActions(req.params.id)
+res.json(actions)
+    } catch(err){
+next(err)
+    }
+})
 
 
 
