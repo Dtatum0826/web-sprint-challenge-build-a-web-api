@@ -23,13 +23,15 @@ res.status(500)({
 
 
 function validateProject(req, res, next) {
-    const { name, description } = req.body;
+    const { name, description, completed } = req.body;
 
-    if (typeof name !== 'string' || typeof description !== 'string') {
+    if (typeof name !== 'string' || typeof description !== 'string' || typeof completed !== 'boolean') {
       return res.status(400).json({ error: 'Invalid project format' });
     }
-  
+  else{
     next();
+  }
+   
   }console.log('validateProject middleware')
   
 

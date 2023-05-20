@@ -27,8 +27,8 @@ router.get('/:id', validateProjectId,(req,res)=>{
 })
 
 router.post('/', validateProject, (req,res,next)=>{
- const {name,description} = req.body
- Projects.insert({name,description})
+ const {name,description, completed} = req.body
+ Projects.insert({name,description,completed})
  .then(newProject =>{
     res.status(201).json(newProject)
  })
@@ -36,8 +36,8 @@ router.post('/', validateProject, (req,res,next)=>{
 })
 
 router.put('/:id', validateProjectId,validateProject,(req,res,next)=>{
-    const {name,description} = req.body
-    Projects.update(req.params.id,{name,description})
+    const {name,description,completed} = req.body
+    Projects.update(req.params.id,{name,description,completed})
     .then(updatedProject =>{
         res.json(updatedProject)
     })
